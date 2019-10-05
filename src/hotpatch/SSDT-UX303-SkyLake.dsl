@@ -28,7 +28,7 @@ DefinitionBlock ("", "SSDT", 2, "hack", "ux303sl", 0)
     
     // others
     #include "include/SSDT-HACK.dsl"
-    //include "include/SSDT-PTSWAK.dsl"
+    #include "include/SSDT-PTSWAK.dsl"
     #include "include/SSDT-LPC.dsl"
-    //include "include/SSDT-IGPU.dsl"
+    #include "include/SSDT-IGPU.dsl"
 }
