@@ -1,0 +1,9 @@
+NAME="UX303 (SkyLake)"
+CONFIGPLIST="config_ux303_skylake.plist"
+CONFIGPARTS=()
+CONFIGMERGE=()
+ETPDPATCH=false
+PRODUCTNAME="MacBookPro13,1"
+AMLFILES=("SSDT-UX303-SkyLake")
+AMLDIR="ux303-skylake"
+ALCPLUGFIX=""
