@@ -1,6 +1,6 @@
 NAME="UX303 (SkyLake)"
 CONFIGPLIST="config_ux303_skylake.plist"
-CONFIGPARTS=("config_skylake.plist")
+CONFIGPARTS=("config_skylake.plist" "config_skylake_a cpi.plist")
 CONFIGMERGE=()
 ETPDPATCH=false
 PRODUCTNAME="MacBookPro13,1"
