@@ -67,6 +67,23 @@ function patchTRIM()
     fi
 }
 
+function patchAPIC()
+# $1 is path to config.plist
+{
+    plistFile=$1
+        countArray $plistFile "KernelAndKextPatches:KextsToPatch"
+        cnt=$(($cnt - 1))
+
+        for idx in `seq 0 $cnt`
+        do
+            val=`/usr/libexec/PlistBuddy -c "Print :KernelAndKextPatches:KextsToPatch:$idx:Name" $plistFile`
+            if [ "$val" == AppleAPIC ]; then
+                echo "APIC entry found"
+                /usr/libexec/PlistBuddy -c "Set :KernelAndKextPatches:KextsToPatch:$idx:Disabled bool NO" $plistFile
+            fi
+        done
+}
+
 function patchCountryCode()
 # $1 is path to config.plist
 {
@@ -117,4 +134,12 @@ cp $SRCCONFIG/config_master.plist $BUILDCONFIG/config_ux303_broadwell.plist
 /usr/libexec/PlistBuddy -c "Add :Comment string This config is created by @hieplpvip for UX303 (Broadwell)" $BUILDCONFIG/config_ux303_broadwell.plist
 /usr/libexec/PlistBuddy -c "Set :SMBIOS:ProductName MacBookPro12,1" $BUILDCONFIG/config_ux303_broadwell.plist
 patchTRIM $BUILDCONFIG/config_ux303_broadwell.plist
+echo
+
+echo creating config_ux303_skylake.plist
+#cp $SRCCONFIG/config_master.plist $BUILDCONFIG/config_ux303_skylake.plist
+/usr/libexec/PlistBuddy -c "Set :Comment string This config is created by @hieplpvip for UX303 (Skylake)" $BUILDCONFIG/config_ux303_skylake.plist
+/usr/libexec/PlistBuddy -c "Set :SMBIOS:ProductName MacBookPro13,1" $BUILDCONFIG/config_ux303_skylake.plist
+echo "patching AppleAPIC for skylake"
+patchAPIC $BUILDCONFIG/config_ux303_skylake.plist
 echo
